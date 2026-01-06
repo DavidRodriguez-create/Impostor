@@ -1,10 +1,10 @@
 # 🎭 Impostor Game - Implementation Complete
 
-## 🌐 Demo en Vivo
+## 🌐 Live Demo
 
 **▶️ [https://davidrodriguez-create.github.io/Impostor/](https://davidrodriguez-create.github.io/Impostor/)**
 
-✅ Desplegado en GitHub Pages con CI/CD automático
+✅ Deployed on GitHub Pages with automatic CI/CD
 
 ---
 
@@ -158,26 +158,26 @@ npm run preview     # Test production build at http://localhost:4173/
 
 ## 📦 Deployment Options
 
-### 1. GitHub Pages (✅ ACTUAL)
+### 1. GitHub Pages (✅ CURRENT)
 
-**Ya está desplegado en**: https://davidrodriguez-create.github.io/Impostor/
+**Already deployed at**: https://davidrodriguez-create.github.io/Impostor/
 
-**CI/CD Automático:**
+**Automatic CI/CD:**
 - Workflow: `.github/workflows/deploy.yml`
-- Trigger: Push a rama `main`
+- Trigger: Push to `main` branch
 - Build: `npm install && npm run build`
-- Deploy: Rama `gh-pages`
-- Tiempo: ~1-2 minutos
+- Deploy: `gh-pages` branch
+- Time: ~1-2 minutes
 
-**Para actualizar:**
+**To update:**
 ```bash
 git add .
 git commit -m "Update app"
 git push origin main
-# GitHub Actions hace el resto automáticamente
+# GitHub Actions does the rest automatically
 ```
 
-### 2. Otros Servicios de Web Hosting
+### 2. Other Web Hosting Services
 - Upload `dist/` folder to:
   - Vercel (recommended)
   - Netlify
@@ -373,41 +373,41 @@ constructor() {
 
 ## 🚀 Deployment
 
-### GitHub Pages (⚡ ACTUAL)
+### GitHub Pages (⚡ CURRENT)
 
-**Ya está desplegado en**: https://davidrodriguez-create.github.io/Impostor/
+**Already deployed at**: https://davidrodriguez-create.github.io/Impostor/
 
-**CI/CD Automático:**
+**Automatic CI/CD:**
 - Workflow: `.github/workflows/deploy.yml`
-- Trigger: Push a rama `main`
+- Trigger: Push to `main` branch
 - Build: `npm install && npm run build`
-- Deploy: Rama `gh-pages`
-- Tiempo: ~1-2 minutos
+- Deploy: `gh-pages` branch
+- Time: ~1-2 minutes
 
-**Para actualizar:**
+**To update:**
 ```bash
 git add .
 git commit -m "Update app"
 git push origin main
-# GitHub Actions hace el resto automáticamente
+# GitHub Actions does the rest automatically
 ```
 
-**Configuración actual:**
-- `vite.config.js`: `base: './'` (rutas relativas)
-- `index.html`: Todos los assets usan rutas relativas (`./src/main.js`)
+**Current configuration:**
+- `vite.config.js`: `base: './'` (relative paths)
+- `index.html`: All assets use relative paths (`./src/main.js`)
 - Settings → Pages → Source: `gh-pages` branch
 
-### Otros Servicios
+### Other Services
 
 **Vercel/Netlify:**
 ```bash
 npm run build
-# Subir carpeta dist/ o conectar repo de GitHub
+# Upload dist/ folder or connect GitHub repo
 ```
 
-**Hosting estático (Apache/Nginx):**
-- Subir contenido de `dist/` al servidor
-- Configurar HTTPS para que la PWA funcione
+**Static hosting (Apache/Nginx):**
+- Upload `dist/` content to server
+- Configure HTTPS for PWA to work
 
 ## 💡 Future Enhancement Ideas
 
@@ -500,8 +500,8 @@ npm run build
 
 ✨ **Highlights:**
 - 5-screen polished game flow
-- Full internationalization (ES/EN)
-- 8 themed word categories (320 words)
+- Full internationalization (ES/EN/FR/ZH)
+- 8 themed word categories (640 words across 4 languages)
 - Mobile-first with native-feeling gestures
 - PWA-ready with offline support
 - Capacitor-ready for iOS/Android
@@ -514,4 +514,4 @@ You can now:
 - ✅ Customize and extend
 - ✅ Add more languages easily
 
-Disfruta tu juego del Impostor! 🎭 Enjoy your Impostor Game!
+Enjoy your Impostor Game! 🎭

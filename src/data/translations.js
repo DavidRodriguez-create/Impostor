@@ -36,9 +36,12 @@ export const TRANSLATIONS = {
     
     // Game Screen
     gameStarted: "¡El juego ha comenzado!",
+    gameContinues: "El juego continúa...",
+    gameOver: "¡Se acabó!",
     discoverImpostors: "Descubre quiénes son los impostores",
     impostorsRemaining: "Impostores por descubrir:",
     revealImpostor: "Revelar Impostor",
+    revealNextImpostor: "Revelar Siguiente Impostor",
     allRevealed: "¡Todos Revelados!",
     playAgain: "Jugar de Nuevo",
     backToStart: "Volver al Inicio",
@@ -86,9 +89,12 @@ export const TRANSLATIONS = {
     
     // Game Screen
     gameStarted: "The game has started!",
+    gameContinues: "The game continues...",
+    gameOver: "Game over!",
     discoverImpostors: "Discover who the impostors are",
     impostorsRemaining: "Impostors to discover:",
     revealImpostor: "Reveal Impostor",
+    revealNextImpostor: "Reveal Next Impostor",
     allRevealed: "All Revealed!",
     playAgain: "Play Again",
     backToStart: "Back to Start",
@@ -136,9 +142,12 @@ export const TRANSLATIONS = {
     
     // Game Screen
     gameStarted: "Le jeu a commencé!",
+    gameContinues: "Le jeu continue...",
+    gameOver: "C'est fini!",
     discoverImpostors: "Découvrez qui sont les imposteurs",
     impostorsRemaining: "Imposteurs à découvrir:",
     revealImpostor: "Révéler l'Imposteur",
+    revealNextImpostor: "Révéler le Prochain Imposteur",
     allRevealed: "Tous Révélés!",
     playAgain: "Rejouer",
     backToStart: "Retour au Début",
@@ -186,9 +195,12 @@ export const TRANSLATIONS = {
     
     // Game Screen
     gameStarted: "游戏开始了！",
+    gameContinues: "游戏继续...",
+    gameOver: "游戏结束！",
     discoverImpostors: "找出冒名顶替者",
     impostorsRemaining: "待发现的冒名顶替者：",
     revealImpostor: "揭露冒名顶替者",
+    revealNextImpostor: "揭露下一个冒名顶替者",
     allRevealed: "全部揭露！",
     playAgain: "再玩一次",
     backToStart: "返回开始",

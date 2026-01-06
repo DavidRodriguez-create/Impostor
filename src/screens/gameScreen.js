@@ -52,12 +52,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Check if all impostors revealed
     if (!gameState.hasMoreImpostors()) {
+      // Game over - all impostors revealed
       revealImpostorBtn.disabled = true;
       revealImpostorBtn.textContent = t('allRevealed');
+      document.querySelector('#game-screen h2').textContent = t('gameOver');
       gameState.stopTimer();
       gameOverActions.style.display = 'flex';
     } else {
-      // After first reveal, button is always enabled
+      // Game continues - more impostors to reveal
+      document.querySelector('#game-screen h2').textContent = t('gameContinues');
+      revealImpostorBtn.textContent = t('revealNextImpostor');
       revealImpostorBtn.disabled = false;
     }
   });
@@ -82,5 +86,29 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize when reveal is complete
   document.addEventListener('reveal-complete', () => {
     initializeGameScreen();
+  });
+
+  // Update texts when language changes
+  document.addEventListener('language-changed', () => {
+    // Update button text based on current game state
+    if (revealImpostorBtn.disabled && gameState.revealedImpostors.length === gameState.impostorCount) {
+      // All revealed
+      revealImpostorBtn.textContent = t('allRevealed');
+      document.querySelector('#game-screen h2').textContent = t('gameOver');
+    } else if (gameState.revealedImpostors.length > 0) {
+      // Game continues
+      revealImpostorBtn.textContent = t('revealNextImpostor');
+      document.querySelector('#game-screen h2').textContent = t('gameContinues');
+    } else {
+      // Game started
+      revealImpostorBtn.textContent = t('revealImpostor');
+      document.querySelector('#game-screen h2').textContent = t('gameStarted');
+    }
+
+    // Update impostor badges in revealed list
+    const impostorBadges = document.querySelectorAll('.impostor-badge');
+    impostorBadges.forEach(badge => {
+      badge.textContent = `🎭 ${t('impostor')}`;
+    });
   });
 });
