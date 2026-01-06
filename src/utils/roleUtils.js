@@ -7,7 +7,7 @@
  * @param {Array} array - Array to shuffle
  * @returns {Array} New shuffled array
  */
-function shuffleArray(array) {
+export function shuffleArray(array) {
   const shuffled = [...array];
   for (let i = shuffled.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -47,14 +47,4 @@ export function markImpostors(players, impostors) {
       player.isImpostor = true;
     }
   });
-}
-
-/**
- * Validate impostor count
- * @param {number} impostorCount - Desired impostor count
- * @param {number} playerCount - Total player count
- * @returns {boolean} Whether the impostor count is valid
- */
-export function validateImpostorCount(impostorCount, playerCount) {
-  return impostorCount >= 1 && impostorCount < playerCount / 2;
 }

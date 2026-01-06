@@ -1,6 +1,6 @@
 import { selectRandomWord, getTranslatedWord } from './data/themes.js';
 import { createPlayer, canAddPlayer, removePlayerById, resetAvatarPool } from './utils/playerUtils.js';
-import { selectImpostors, resetPlayerRoles, markImpostors } from './utils/roleUtils.js';
+import { selectImpostors, resetPlayerRoles, markImpostors, shuffleArray } from './utils/roleUtils.js';
 import { formatTime, calculateEndTime, getRemainingTime } from './utils/timerUtils.js';
 
 /**
@@ -36,16 +36,6 @@ class GameState {
     this.allVotedPlayerIds = []; // Track all players ever voted for
   }
 
-  // Shuffle array using Fisher-Yates algorithm
-  shuffleArray(array) {
-    const shuffled = [...array];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-    return shuffled;
-  }
-
   // Player Management Methods
   
   addPlayer(name) {
@@ -79,7 +69,7 @@ class GameState {
     
     // Create shuffled reveal order
     const indices = this.players.map((_, index) => index);
-    this.revealOrder = this.shuffleArray(indices);
+    this.revealOrder = shuffleArray(indices);
     
     // Reset game flow
     this.revealedImpostors = [];

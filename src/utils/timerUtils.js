@@ -23,15 +23,6 @@ export function calculateEndTime(minutes) {
 }
 
 /**
- * Check if time has expired
- * @param {number} endTime - End timestamp
- * @returns {boolean} Whether time has expired
- */
-export function hasTimeExpired(endTime) {
-  return Date.now() >= endTime;
-}
-
-/**
  * Get remaining time
  * @param {number} endTime - End timestamp
  * @returns {number} Remaining time in milliseconds

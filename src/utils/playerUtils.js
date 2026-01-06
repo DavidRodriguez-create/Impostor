@@ -77,13 +77,3 @@ export function canAddPlayer(currentCount, maxPlayers) {
 export function removePlayerById(players, playerId) {
   return players.filter(p => p.id !== playerId);
 }
-
-/**
- * Find player by ID
- * @param {Array} players - Array of players
- * @param {number} playerId - ID of player to find
- * @returns {object|undefined} Player object or undefined
- */
-export function findPlayerById(players, playerId) {
-  return players.find(p => p.id === playerId);
-}
