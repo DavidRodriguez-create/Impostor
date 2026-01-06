@@ -5,7 +5,6 @@ import './screens/themeScreen.js';
 import './screens/setupScreen.js';
 import './screens/revealScreen.js';
 import './screens/gameScreen.js';
-import packageJson from '../package.json';
 
 // Screen navigation
 export function showScreen(screenId) {
@@ -23,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Set version dynamically
   const versionElement = document.getElementById('app-version');
   if (versionElement) {
-    versionElement.textContent = packageJson.version;
+    versionElement.textContent = __APP_VERSION__;
   }
   
   showScreen('start-screen');
