@@ -111,6 +111,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function checkOnlyImpostorsRemainUnvoted() {
+    // Get all players who have NOT been voted for yet
+    const unvotedPlayers = gameState.players.filter(player => 
+      !gameState.allVotedPlayerIds.includes(player.id)
+    );
+    
+    // If no unvoted players remain, return false (all voted)
+    if (unvotedPlayers.length === 0) {
+      return false;
+    }
+    
+    // Check if ALL unvoted players are impostors
+    const allUnvotedAreImpostors = unvotedPlayers.every(player => player.isImpostor);
+    
+    return allUnvotedAreImpostors;
+  }
+
   function initializeGameScreen() {
     // Reset header text
     document.querySelector('#game-screen h2').textContent = t('gameStarted');
@@ -258,8 +275,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const remaining = gameState.impostorCount - gameState.revealedImpostors.length;
     impostorsRemainingSpan.textContent = remaining;
     
+    // Check if only impostors remain unvoted (automatic impostor victory)
+    const onlyImpostorsRemain = checkOnlyImpostorsRemainUnvoted();
+    
+    if (onlyImpostorsRemain) {
+      // Impostors win automatically - only impostors left to vote for
+      voteBtn.style.display = 'none';
+      revealImpostorBtn.style.display = 'none';
+      timerDisplay.style.display = 'none';
+      gameInfo.style.display = 'none';
+      gameHeader.style.display = 'block';
+      document.querySelector('#game-screen h2').textContent = t('gameOver');
+      gameState.stopTimer();
+      displayWinners();
+      hideWinnersFromList();
+      gameOverActions.style.display = 'flex';
+    }
     // Check if all impostors found
-    if (!gameState.hasMoreImpostors()) {
+    else if (!gameState.hasMoreImpostors()) {
       voteBtn.style.display = 'none';
       revealImpostorBtn.style.display = 'none';
       timerDisplay.style.display = 'none';
