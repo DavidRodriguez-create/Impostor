@@ -1,0 +1,24 @@
+{
+  "name": "impostor-game",
+  "version": "1.0.0",
+  "description": "A lightweight Impostor game for mobile and web",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "cap:sync": "cap sync",
+    "cap:android": "cap open android",
+    "cap:ios": "cap open ios"
+  },
+  "devDependencies": {
+    "vite": "^4.5.0",
+    "vite-plugin-pwa": "^0.16.0"
+  },
+  "dependencies": {
+    "@capacitor/android": "^5.5.0",
+    "@capacitor/core": "^5.5.0",
+    "@capacitor/ios": "^5.5.0",
+    "@capacitor/cli": "^5.5.0"
+  }
+}

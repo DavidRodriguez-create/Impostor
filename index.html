@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#1a1a2e">
+  <meta name="description" content="Juego del Impostor - Un juego social de deducción">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Impostor">
+  <link rel="icon" type="image/png" href="/icon-192.png">
+  <link rel="apple-touch-icon" href="/icon-192.png">
+  <title>Impostor Game</title>
+  <link rel="stylesheet" href="/src/styles.css">
+</head>
+<body>
+  <div id="app">
+    
+    <!-- Screen 0: Start/Welcome -->
+    <div id="start-screen" class="screen active">
+      <div class="container start-container">
+        <div class="language-selector">
+          <select id="language-select" class="language-dropdown">
+            <option value="es">🌐 Español (ES)</option>
+            <option value="en">🌐 English (EN)</option>
+            <option value="fr">🌐 Français (FR)</option>
+            <option value="zh">🌐 中文 (ZH)</option>
+          </select>
+        </div>
+        <h1 class="game-title" data-i18n="gameTitle">🎭 Impostor</h1>
+        <button id="start-btn" class="btn btn-primary btn-large" data-i18n="startButton">Comenzar Juego</button>
+      </div>
+    </div>
+
+    <!-- Screen 1: Theme Selection -->
+    <div id="theme-screen" class="screen">
+      <div class="container">
+        <div class="language-selector">
+          <select class="language-dropdown language-select-global">
+            <option value="es">🌐 Español (ES)</option>
+            <option value="en">🌐 English (EN)</option>
+            <option value="fr">🌐 Français (FR)</option>
+            <option value="zh">🌐 中文 (ZH)</option>
+          </select>
+        </div>
+        <h1 class="game-title" data-i18n="selectThemes">Selecciona Temas</h1>
+        <p class="theme-subtitle" data-i18n="selectThemesSubtitle">Elige uno o más temas para las palabras secretas</p>
+        
+        <div id="themes-grid" class="themes-grid"></div>
+        
+        <div class="selected-themes-info">
+          <p><span data-i18n="themesSelected">Temas seleccionados:</span> <span id="selected-count">0</span></p>
+        </div>
+        
+        <button id="confirm-themes-btn" class="btn btn-primary" data-i18n="continueToSetup" disabled>Continuar al Setup</button>
+      </div>
+    </div>
+
+    <!-- Screen 2: Setup -->
+    <div id="setup-screen" class="screen">
+      <div class="container">
+        <div class="language-selector">
+          <select class="language-dropdown language-select-global">
+            <option value="es">🌐 Español (ES)</option>
+            <option value="en">🌐 English (EN)</option>
+            <option value="fr">🌐 Français (FR)</option>
+            <option value="zh">🌐 中文 (ZH)</option>
+          </select>
+        </div>
+        <h1 class="game-title" data-i18n="gameTitle">🎭 Impostor</h1>
+        
+        <div class="config-section">
+          <h2 data-i18n="configuration">Configuración</h2>
+          
+          <div class="input-group">
+            <label data-i18n="impostorCount">Número de impostores:</label>
+            <div class="number-picker" id="impostor-picker">
+              <div class="number-picker-value" id="impostor-count-value">1</div>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="timer-mode" data-i18n="timeMode">Modo de tiempo:</label>
+            <select id="timer-mode">
+              <option value="infinite" data-i18n="timeModeInfinite">Infinito</option>
+              <option value="timed" data-i18n="timeModeTimed">Temporizador</option>
+            </select>
+          </div>
+
+          <div class="input-group" id="timer-input-group" style="display: none;">
+            <label data-i18n="minutes">Minutos:</label>
+            <div class="number-picker" id="timer-picker">
+              <div class="number-picker-value" id="timer-minutes-value">5</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="players-section">
+          <h2 data-i18n="players">Jugadores</h2>
+          <div class="add-player-form">
+            <input type="text" id="player-name-input" data-i18n-placeholder="playerNamePlaceholder" placeholder="Nombre del jugador" maxlength="20">
+            <button id="add-player-btn" class="btn btn-secondary" data-i18n="addButton">➕ Añadir</button>
+          </div>
+          <div id="players-list" class="players-list"></div>
+          <div class="player-count"><span data-i18n="playersCount">Jugadores:</span> <span id="player-count">0</span></div>
+        </div>
+
+        <button id="start-game-btn" class="btn btn-primary" data-i18n="startGame" disabled>Empezar Juego</button>
+        <button id="back-to-themes-btn" class="btn btn-secondary" data-i18n="changeThemes">Cambiar Temas</button>
+      </div>
+    </div>
+
+    <!-- Screen 3: Role Reveal (for each player) -->
+    <div id="reveal-screen" class="screen">
+      <div class="container reveal-container">
+        <div class="language-selector">
+          <select class="language-dropdown language-select-global">
+            <option value="es">🌐 Español (ES)</option>
+            <option value="en">🌐 English (EN)</option>
+            <option value="fr">🌐 Français (FR)</option>
+            <option value="zh">🌐 中文 (ZH)</option>
+          </select>
+        </div>
+        <div class="player-info">
+          <img id="current-player-avatar" class="player-avatar-large" src="" alt="Avatar">
+          <h2 id="current-player-name">Jugador</h2>
+        </div>
+
+        <div class="reveal-area">
+          <div id="reveal-card" class="reveal-card">
+            <div class="reveal-cover" id="reveal-cover">
+              <div class="reveal-instruction">
+                <span class="hand-icon">👆</span>
+                <p><span data-i18n="swipeUp">Desliza hacia arriba</span><br><span data-i18n="toSeeRole">para ver tu rol</span></p>
+              </div>
+            </div>
+            <div class="reveal-content" id="reveal-content">
+              <div class="role-text" id="role-text"></div>
+            </div>
+          </div>
+        </div>
+
+        <button id="next-player-btn" class="btn btn-primary" data-i18n="nextPlayer">Siguiente Jugador</button>
+      </div>
+    </div>
+
+    <!-- Screen 4: Game Timer & Reveal -->
+    <div id="game-screen" class="screen">
+      <div class="container game-container">
+        <div class="language-selector">
+          <select class="language-dropdown language-select-global">
+            <option value="es">🌐 Español (ES)</option>
+            <option value="en">🌐 English (EN)</option>
+            <option value="fr">🌐 Français (FR)</option>
+            <option value="zh">🌐 中文 (ZH)</option>
+          </select>
+        </div>
+        <h2 data-i18n="gameStarted">¡El juego ha comenzado!</h2>
+        
+        <div class="timer-display">
+          <div id="timer-text" class="timer-text">∞</div>
+        </div>
+
+        <div class="game-info">
+          <p data-i18n="discoverImpostors">Descubre quiénes son los impostores</p>
+          <p class="impostors-remaining">
+            <span data-i18n="impostorsRemaining">Impostores por descubrir:</span> <span id="impostors-remaining">0</span>
+          </p>
+        </div>
+
+        <button id="reveal-impostor-btn" class="btn btn-danger" data-i18n="revealImpostor" disabled>
+          Revelar Impostor
+        </button>
+
+        <div id="revealed-impostors" class="revealed-list"></div>
+
+        <div class="game-actions" id="game-over-actions" style="display: none;">
+          <button id="play-again-btn" class="btn btn-secondary" data-i18n="playAgain">Jugar de Nuevo</button>
+          <button id="back-to-setup-btn" class="btn btn-primary" data-i18n="backToStart">Volver al Inicio</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
