@@ -134,8 +134,12 @@ class GameState {
 
   enableRevealButton() {
     const revealBtn = document.getElementById('reveal-impostor-btn');
+    const voteBtn = document.getElementById('vote-btn');
     if (revealBtn) {
       revealBtn.disabled = false;
+    }
+    if (voteBtn) {
+      voteBtn.disabled = false;
     }
   }
 
