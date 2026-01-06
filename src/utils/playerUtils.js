@@ -2,7 +2,10 @@
  * Player Management Module
  */
 
-const AVATAR_COUNT = 11;
+// Dynamically count avatars using Vite's glob import
+// Using absolute path from project root (/public is served as /)
+const avatarFiles = import.meta.glob('/avatars/avatar-*.png', { eager: true });
+const AVATAR_COUNT = Object.keys(avatarFiles).length || 11; // Fallback to 11 if glob fails
 
 /**
  * Create a new player object

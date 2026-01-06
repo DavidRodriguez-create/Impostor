@@ -176,8 +176,13 @@ impostor/
   ```
 
 ### Add Avatars
-- Add files to `public/avatars/` (avatar-12.png, avatar-13.png, etc.)
-- Update count in `src/utils/playerUtils.js`
+- Add PNG files to `public/avatars/` with any name
+- Run `npm run check:images` to automatically:
+  - Rename files to standard format (`avatar-N.png`)
+  - Optimize oversized images (> 2MB) for PWA caching
+  - Reorder avatars sequentially (1, 2, 3... N)
+- Avatar count is **detected automatically** - no code changes needed!
+- ⚠️ **Important**: Always run `npm run check:images` after adding/removing avatars
 
 ## 📄 License
 
