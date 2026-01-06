@@ -14,7 +14,7 @@ export function createPlayer(name) {
   return {
     id: Date.now() + Math.random(),
     name,
-    avatar: `/avatars/avatar-${avatarId}.png`,
+    avatar: `./avatars/avatar-${avatarId}.png`,
     isImpostor: false
   };
 }
