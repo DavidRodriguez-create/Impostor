@@ -466,10 +466,12 @@ h2 {
   gap: 12px;
   margin-bottom: 20px;
   align-items: stretch;
+  flex-wrap: wrap;
 }
 
 .add-player-form input {
   flex: 1;
+  min-width: 200px;
   padding: 14px 18px;
   background: var(--bg-light);
   border: 2px solid var(--bg-light);
