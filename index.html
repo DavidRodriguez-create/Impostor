@@ -12,8 +12,8 @@
   <link rel="apple-touch-icon" href="./icon-192.png">
   <title>Impostor Game</title>
   
-  <script type="module" crossorigin src="./assets/index-388c8c5f.js"></script>
-  <link rel="stylesheet" href="./assets/index-0be50363.css">
+  <script type="module" crossorigin src="./assets/index-e2f07ac1.js"></script>
+  <link rel="stylesheet" href="./assets/index-127739a5.css">
 <link rel="manifest" href="./manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="./registerSW.js"></script></head>
 <body>
   <div id="app">
@@ -173,6 +173,22 @@
         <button id="reveal-impostor-btn" class="btn btn-danger" data-i18n="revealImpostor" disabled>
           Revelar Impostor
         </button>
+
+        <button id="vote-btn" class="btn btn-primary" data-i18n="voteForImpostors" style="display: none;">
+          Votar por Impostores
+        </button>
+
+        <!-- Voting Section -->
+        <div id="voting-section" class="voting-section" style="display: none;">
+          <h3 data-i18n="selectPlayers">Selecciona a los sospechosos</h3>
+          <p class="votes-remaining">
+            <span data-i18n="votesRemaining">Votos restantes:</span> <span id="votes-remaining">0</span>
+          </p>
+          <div id="voting-players-list" class="voting-players-list"></div>
+          <button id="confirm-votes-btn" class="btn btn-success" data-i18n="confirmVotes" disabled>
+            Confirmar Votos
+          </button>
+        </div>
 
         <div id="revealed-impostors" class="revealed-list"></div>
 
