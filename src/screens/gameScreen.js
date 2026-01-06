@@ -5,6 +5,9 @@ import { t } from '../data/translations.js';
 // Game Screen Logic
 document.addEventListener('DOMContentLoaded', () => {
   const timerText = document.getElementById('timer-text');
+  const timerDisplay = document.querySelector('.timer-display');
+  const gameHeader = document.querySelector('#game-screen h2');
+  const gameInfo = document.querySelector('.game-info');
   const impostorsRemainingSpan = document.getElementById('impostors-remaining');
   const revealImpostorBtn = document.getElementById('reveal-impostor-btn');
   const voteBtn = document.getElementById('vote-btn');
@@ -18,6 +21,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const backToSetupBtn = document.getElementById('back-to-setup-btn');
 
   function initializeGameScreen() {
+    // Reset header text
+    document.querySelector('#game-screen h2').textContent = t('gameStarted');
+    
+    // Ensure timer and info sections are visible
+    timerDisplay.style.display = 'flex';
+    gameHeader.style.display = 'block';
+    gameInfo.style.display = 'block';
+    
     // Set initial impostor count
     impostorsRemainingSpan.textContent = gameState.impostorCount;
     revealedImpostorsDiv.innerHTML = '';
@@ -25,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     votingSection.style.display = 'none';
     voteBtn.style.display = 'inline-block';
     revealImpostorBtn.style.display = 'inline-block';
+    revealImpostorBtn.textContent = t('revealImpostor');
 
     // Set timer display
     if (gameState.timerMode === 'infinite') {
@@ -87,6 +99,9 @@ document.addEventListener('DOMContentLoaded', () => {
     votingSection.style.display = 'block';
     voteBtn.style.display = 'none';
     revealImpostorBtn.style.display = 'none';
+    timerDisplay.style.display = 'none';
+    gameHeader.style.display = 'none';
+    gameInfo.style.display = 'none';
     renderVotingPlayers();
   });
 
@@ -139,6 +154,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const results = gameState.processVotes();
     displayVotingResults(results);
     votingSection.style.display = 'none';
+    timerDisplay.style.display = 'flex';
+    gameInfo.style.display = 'block';
     
     // Update remaining count
     const remaining = gameState.impostorCount - gameState.revealedImpostors.length;
@@ -148,10 +165,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!gameState.hasMoreImpostors()) {
       voteBtn.style.display = 'none';
       revealImpostorBtn.style.display = 'none';
+      gameHeader.style.display = 'block';
       document.querySelector('#game-screen h2').textContent = t('gameOver');
       gameState.stopTimer();
       gameOverActions.style.display = 'flex';
     } else {
+      gameHeader.style.display = 'block';
       document.querySelector('#game-screen h2').textContent = t('gameContinues');
       voteBtn.style.display = 'inline-block';
       voteBtn.disabled = false;

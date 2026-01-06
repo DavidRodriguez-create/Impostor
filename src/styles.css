@@ -722,7 +722,7 @@ h2 {
 }
 
 .timer-display {
-  margin: 40px 0;
+  margin: 40px auto;
   padding: 30px;
   background: var(--bg-medium);
   border-radius: 50%;
