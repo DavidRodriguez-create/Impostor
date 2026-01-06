@@ -1,6 +1,6 @@
 {
   "name": "impostor-game",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A lightweight Impostor game for mobile and web",
   "type": "module",
   "scripts": {

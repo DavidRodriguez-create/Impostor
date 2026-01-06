@@ -19,11 +19,21 @@ document.addEventListener('DOMContentLoaded', () => {
   console.log('Impostor Game Loaded');
   initLanguageSelector();
   
-  // Set version dynamically
-  const versionElement = document.getElementById('app-version');
-  if (versionElement) {
-    versionElement.textContent = __APP_VERSION__;
-  }
+  // Set version dynamically in all screens
+  const versionElements = [
+    'app-version',
+    'app-version-theme',
+    'app-version-setup',
+    'app-version-reveal',
+    'app-version-game'
+  ];
+  
+  versionElements.forEach(id => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.textContent = __APP_VERSION__;
+    }
+  });
   
   showScreen('start-screen');
 });
