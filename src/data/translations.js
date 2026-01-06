@@ -33,6 +33,7 @@ export const TRANSLATIONS = {
     impostor: "IMPOSTOR",
     impostorSubtitle: "Actúa con naturalidad",
     yourWordIs: "TU PALABRA ES:",
+    revealedByButton: "😈 ¡No me encontraron!",
     
     // Game Screen
     gameStarted: "¡El juego ha comenzado!",
@@ -43,6 +44,13 @@ export const TRANSLATIONS = {
     revealImpostor: "Revelar Impostor",
     revealNextImpostor: "Revelar Siguiente Impostor",
     allRevealed: "¡Todos Revelados!",
+    voteForImpostors: "Votar por Impostores",
+    selectPlayers: "Selecciona a los sospechosos",
+    votesRemaining: "Votos restantes:",
+    confirmVotes: "Confirmar Votos",
+    votingResults: "Resultados de la Votación",
+    correctGuess: "¡Correcto! Era impostor",
+    wrongGuess: "¡Incorrecto! No era impostor",
     playAgain: "Jugar de Nuevo",
     backToStart: "Volver al Inicio",
     
@@ -86,6 +94,7 @@ export const TRANSLATIONS = {
     impostor: "IMPOSTOR",
     impostorSubtitle: "Act naturally",
     yourWordIs: "YOUR WORD IS:",
+    revealedByButton: "😈 You didn't find me!",
     
     // Game Screen
     gameStarted: "The game has started!",
@@ -96,6 +105,13 @@ export const TRANSLATIONS = {
     revealImpostor: "Reveal Impostor",
     revealNextImpostor: "Reveal Next Impostor",
     allRevealed: "All Revealed!",
+    voteForImpostors: "Vote for Impostors",
+    selectPlayers: "Select the suspects",
+    votesRemaining: "Votes remaining:",
+    confirmVotes: "Confirm Votes",
+    votingResults: "Voting Results",
+    correctGuess: "Correct! Was an impostor",
+    wrongGuess: "Wrong! Was not an impostor",
     playAgain: "Play Again",
     backToStart: "Back to Start",
     
@@ -139,6 +155,7 @@ export const TRANSLATIONS = {
     impostor: "IMPOSTEUR",
     impostorSubtitle: "Agissez naturellement",
     yourWordIs: "VOTRE MOT EST:",
+    revealedByButton: "😈 Vous ne m'avez pas trouvé!",
     
     // Game Screen
     gameStarted: "Le jeu a commencé!",
@@ -149,6 +166,13 @@ export const TRANSLATIONS = {
     revealImpostor: "Révéler l'Imposteur",
     revealNextImpostor: "Révéler le Prochain Imposteur",
     allRevealed: "Tous Révélés!",
+    voteForImpostors: "Voter pour les Imposteurs",
+    selectPlayers: "Sélectionnez les suspects",
+    votesRemaining: "Votes restants:",
+    confirmVotes: "Confirmer les Votes",
+    votingResults: "Résultats du Vote",
+    correctGuess: "Correct! Était un imposteur",
+    wrongGuess: "Faux! N'était pas un imposteur",
     playAgain: "Rejouer",
     backToStart: "Retour au Début",
     
@@ -192,6 +216,7 @@ export const TRANSLATIONS = {
     impostor: "冒名顶替者",
     impostorSubtitle: "表现自然",
     yourWordIs: "你的词是：",
+    revealedByButton: "😈 你们没找到我！",
     
     // Game Screen
     gameStarted: "游戏开始了！",
@@ -202,6 +227,13 @@ export const TRANSLATIONS = {
     revealImpostor: "揭露冒名顶替者",
     revealNextImpostor: "揭露下一个冒名顶替者",
     allRevealed: "全部揭露！",
+    voteForImpostors: "投票找出冒名顶替者",
+    selectPlayers: "选择可疑人员",
+    votesRemaining: "剩余投票：",
+    confirmVotes: "确认投票",
+    votingResults: "投票结果",
+    correctGuess: "正确！是冒名顶替者",
+    wrongGuess: "错误！不是冒名顶替者",
     playAgain: "再玩一次",
     backToStart: "返回开始",
     

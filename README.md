@@ -12,15 +12,22 @@ A mobile-first social deduction game built as a PWA (Progressive Web App).
 
 ## 🎮 Features
 
-- **Theme System**: 8 thematic categories with secret words (Places, Food, Animals, Objects, Activities, Professions, Colors & Shapes, Emotions)
+- **Theme System**: 8 thematic categories with secret words (Places, Food, Animals, Objects, Activities, Professions, Colors, Emotions)
 - **Advanced Multilanguage**: Complete support for 4 languages (Español, English, Français, 中文) with real-time switching
 - **Word Translation**: Shared key mapping system - game words translate automatically when changing language
 - **Global Language Selector**: Change language on any screen, not just at the start
+- **Voting System**: Players can vote for suspected impostors during gameplay
+  - Vote for up to the number of impostors
+  - See results: ✓ Correct (green) or ✗ Wrong (red)
+  - Players already voted or revealed cannot be voted again
+  - Multiple voting rounds allowed
 - **Game Setup**: Configure players (up to 100), impostor count (no limit, just < player count), and time with touch-optimized controls
 - **Vertical Controls**: Native mobile-style vertical swipe pickers for number inputs
 - **Role Assignment**: Each player secretly views their role with improved bidirectional swipe system
 - **Timer**: Infinite mode or configurable time limit (1-60 minutes via swipe picker)
-- **Gradual Revelation**: Discover impostors one by one
+- **Gradual Revelation**: Discover impostors one by one with button or through voting
+- **Dynamic Messages**: Game state changes reflected in UI (Game Started → Game Continues → Game Over)
+- **Mocking Reveals**: Button-revealed impostors show special message "😈 You didn't find me!" with purple styling
 - **Validations**: Unique player names, impostor count must be less than player count
 - **Cross-platform**: Works in web browser and as installable app (PWA)
 - **Native Packaging**: Android/iOS support via Capacitor
@@ -88,7 +95,11 @@ npm run cap:ios
 4. **Reveal**: Each player swipes up to see their role and secret word, can hide by swiping down
    - Words translate automatically if you change language during the game
 5. **Game**: Start the timer (or infinite mode) and discuss to discover impostors
-6. **Final Reveal**: Reveal impostors one by one when ready
+   - **Vote**: Click "Vote for Impostors" to select suspected players (up to impostor count)
+   - See results: ✓ Correct guess (green) or ✗ Wrong guess (red)
+   - Vote multiple times until all impostors are found
+   - **Reveal Button**: Manually reveal remaining impostors (shows mocking message 😈)
+6. **Game Over**: All impostors revealed - play again or return to setup
 
 ## 🗂️ Project Structure
 
@@ -101,8 +112,8 @@ impostor/
 │   └── favicon.ico       # Favicon
 ├── src/
 │   ├── data/
-│   │   ├── themes.js         # 8 bilingual thematic categories (ES/EN)
-│   │   └── translations.js   # Complete translation system
+│   │   ├── themes.js         # 8 word categories with 4-language mapping (ES/EN/FR/ZH)
+│   │   └── translations.js   # Complete UI translation system (4 languages)
 │   ├── utils/
 │   │   ├── languageManager.js  # Language switching management
 │   │   ├── playerUtils.js      # Player utilities
@@ -113,10 +124,10 @@ impostor/
 │   │   ├── themeScreen.js    # Theme selection (multi-select)
 │   │   ├── setupScreen.js    # Setup with vertical swipe pickers
 │   │   ├── revealScreen.js   # Bidirectional swipe reveal
-│   │   └── gameScreen.js     # Game screen with timer
-│   ├── game.js           # State management (GameState class)
+│   │   └── gameScreen.js     # Game screen with timer and voting system
+│   ├── game.js           # State management (GameState class with voting logic)
 │   ├── main.js           # Entry point & routing
-│   └── styles.css        # Global styles (797+ lines)
+│   └── styles.css        # Global styles (1000+ lines)
 ├── index.html            # HTML with all screens
 ├── vite.config.js        # Vite + PWA configuration
 ├── capacitor.config.ts   # Capacitor configuration
@@ -131,20 +142,22 @@ impostor/
    export const TRANSLATIONS = {
      es: { ... },
      en: { ... },
-     fr: { /* new translations */ }
+     fr: { ... },
+     zh: { ... },
+     it: { /* new translations */ }
    };
    ```
-2. Edit `src/data/themes.js` and add translated themes:
+2. Edit `src/data/themes.js` and add translated themes using **SAME keys**:
    ```javascript
    export const WORD_THEMES = {
-     es: { ... },
-     en: { ... },
-     fr: { /* new themes */ }
+     es: { places: { words: { beach: "Playa", ... } } },
+     en: { places: { words: { beach: "Beach", ... } } },
+     it: { places: { words: { beach: "Spiaggia", ... } } }
    };
    ```
-3. Add option in `index.html`:
+3. Add option in `index.html` (5 language dropdowns):
    ```html
-   <option value="fr">🌐 Français (FR)</option>
+   <option value="it">🌐 Italiano (IT)</option>
    ```
 
 ### Modify Themes and Words

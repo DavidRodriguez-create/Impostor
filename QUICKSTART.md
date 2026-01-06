@@ -28,7 +28,14 @@ Your Impostor game will be accessible at: **http://localhost:5173/**
   - Timer mode (Infinite or Timed with minutes selector)
 - **Reveal roles** with bidirectional swipe gesture (up to reveal, down to hide)
 - **Test word translation**: Change language during reveal screen - words translate automatically!
-- **Play game** with timer and sequential impostor reveals
+- **Play game**:
+  - **Voting System**: Click "Vote for Impostors", select players, confirm votes
+  - See results: ✓ Correct (green) or ✗ Wrong (red)
+  - Vote again - previously voted players won't appear
+  - **Manual Reveal**: Use "Reveal Impostor" button - see mocking message 😈
+  - Change language during game - all text updates including voting results
+  - Timer countdown or infinite mode
+- **Game Over**: All impostors revealed - play again or back to setup
 
 ### 2. Test Mobile Gestures
 - Get your computer's local IP address:
@@ -39,6 +46,11 @@ Your Impostor game will be accessible at: **http://localhost:5173/**
   - Vertical swipe pickers for numbers
   - Bidirectional role reveal swipe
   - Theme multi-select buttons
+  - Voting: tap to select/deselect players
+- Test voting system on mobile:
+  - Select multiple players with touch
+  - Confirm votes, see results
+  - Verify previous votes persist across rounds
 
 ### 3. Build for Production
 ```bash
@@ -81,8 +93,14 @@ Then build IPA from Xcode
 - [ ] Bidirectional swipe reveal (up = reveal, down = hide) - smooth tracking
 - [ ] Reveal can be hidden again by swiping down
 - [ ] Role assignment (impostors get "IMPOSTOR" badge, others get secret word)
+- [ ] **Voting system**: Vote for suspected impostors
+- [ ] **Vote results**: ✓ Correct (green) / ✗ Wrong (red) badges
+- [ ] **Vote tracking**: Previously voted players don't appear in next round
+- [ ] **Revealed filter**: Already revealed impostors can't be voted
+- [ ] **Manual reveal**: Button shows mocking message "😈 You didn't find me!"
+- [ ] **Dynamic messages**: Game state updates (Started → Continues → Over)
+- [ ] **Language-aware results**: Voting results translate with language change
 - [ ] Timer countdown (if timed mode)
-- [ ] Reveal impostors one by one
 - [ ] Play again functionality
 - [ ] Back to start/setup navigation
 - [ ] Responsive design on different screen sizes

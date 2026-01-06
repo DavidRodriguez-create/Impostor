@@ -30,6 +30,9 @@ class GameState {
     this.currentPlayerIndex = 0;
     this.impostors = [];
     this.revealedImpostors = [];
+    this.votedPlayers = [];
+    this.votingResults = [];
+    this.allVotedPlayerIds = []; // Track all players ever voted for
   }
 
   // Player Management Methods
@@ -154,6 +157,63 @@ class GameState {
     return this.revealedImpostors.length < this.impostors.length;
   }
 
+  // Voting Methods
+  
+  voteForPlayer(playerId) {
+    const index = this.votedPlayers.indexOf(playerId);
+    if (index > -1) {
+      // Unvote
+      this.votedPlayers.splice(index, 1);
+      return false;
+    } else if (this.votedPlayers.length < this.impostorCount) {
+      // Vote
+      this.votedPlayers.push(playerId);
+      return true;
+    }
+    return false;
+  }
+
+  isPlayerVoted(playerId) {
+    return this.votedPlayers.includes(playerId);
+  }
+
+  getRemainingVotes() {
+    return this.impostorCount - this.votedPlayers.length;
+  }
+
+  processVotes() {
+    this.votingResults = this.votedPlayers.map(votedId => {
+      const player = this.players.find(p => p.id === votedId);
+      const isImpostor = this.impostors.find(imp => imp.id === votedId);
+      
+      // Add ALL voted players to tracking list (correct or wrong)
+      if (!this.allVotedPlayerIds.includes(votedId)) {
+        this.allVotedPlayerIds.push(votedId);
+      }
+      
+      if (isImpostor && !this.revealedImpostors.find(r => r.id === votedId)) {
+        this.revealedImpostors.push(player);
+      }
+      
+      return {
+        player,
+        isImpostor: !!isImpostor,
+        correct: !!isImpostor
+      };
+    });
+    
+    return this.votingResults;
+  }
+
+  hasBeenVotedBefore(playerId) {
+    return this.allVotedPlayerIds.includes(playerId);
+  }
+
+  resetVoting() {
+    this.votedPlayers = [];
+    // Don't reset votingResults or allVotedPlayerIds - keep history
+  }
+
   // Reset Methods
   
   reset() {
@@ -162,6 +222,9 @@ class GameState {
     this.impostors = [];
     this.revealedImpostors = [];
     this.gameStartTime = null;
+    this.votedPlayers = [];
+    this.votingResults = [];
+    this.allVotedPlayerIds = [];
   }
 
   resetAll() {

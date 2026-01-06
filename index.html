@@ -172,6 +172,22 @@
           Revelar Impostor
         </button>
 
+        <button id="vote-btn" class="btn btn-primary" data-i18n="voteForImpostors" style="display: none;">
+          Votar por Impostores
+        </button>
+
+        <!-- Voting Section -->
+        <div id="voting-section" class="voting-section" style="display: none;">
+          <h3 data-i18n="selectPlayers">Selecciona a los sospechosos</h3>
+          <p class="votes-remaining">
+            <span data-i18n="votesRemaining">Votos restantes:</span> <span id="votes-remaining">0</span>
+          </p>
+          <div id="voting-players-list" class="voting-players-list"></div>
+          <button id="confirm-votes-btn" class="btn btn-success" data-i18n="confirmVotes" disabled>
+            Confirmar Votos
+          </button>
+        </div>
+
         <div id="revealed-impostors" class="revealed-list"></div>
 
         <div class="game-actions" id="game-over-actions" style="display: none;">

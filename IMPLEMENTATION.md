@@ -17,7 +17,7 @@ A fully functional **Impostor Game** PWA with advanced mobile-first features:
 - **Global Language Selector**: Dropdown available on all 5 screens, change language anytime during gameplay
 - **Theme Selection**: 8 word categories with multi-select capability
   - Lugares/Places/Lieux/地点, Comida/Food/Nourriture/食物, Animales/Animals/Animaux/动物, Objetos/Objects/Objets/物品
-  - Actividades/Activities/Activités/活动, Profesiones/Professions/Professions/职业, Colores & Formas/Colors & Shapes/Couleurs et Formes/颜色和形状, Emociones/Emotions/Émotions/情绪
+  - Actividades/Activities/Activités/活动, Profesiones/Professions/Professions/职业, Colores/Colors/Couleurs/颜色, Emociones/Emotions/Émotions/情绪
   - 20 words per category per language (640 total words across 4 languages)
 - **Word Mapping System**: Words use shared keys (beach, dog, red, etc.) for cross-language translation
   - Enables real-time word translation when switching languages during reveal phase
@@ -34,9 +34,19 @@ A fully functional **Impostor Game** PWA with advanced mobile-first features:
   - Snap points at 150px threshold
   - Role-specific content (IMPOSTOR badge or secret word)
   - Words translate automatically when language changes during reveal
-- **Game Timer**: 
-  - Countdown display or infinite mode
-  - Sequential impostor revelation system
+- **Game Screen**: 
+  - **Voting System**: Players can vote for suspected impostors
+    - Vote for up to the impostor count
+    - Visual feedback: green border for selected players
+    - Results show ✓ Correct (green) or ✗ Wrong (red)
+    - Voted players cannot be voted again in future rounds
+    - Revealed impostors cannot be voted
+    - Multiple voting rounds until all impostors found
+  - **Manual Reveal**: Button to reveal remaining impostors
+    - Shows mocking message: "😈 You didn't find me!" (in all 4 languages)
+    - Purple badge and styling for button-revealed impostors
+  - **Dynamic Messages**: Game state updates (Started → Continues → Over)
+  - Countdown timer display or infinite mode
   - Play again and back to start options
 - **Internationalization**: 
   - Complete UI translation system (ES/EN/FR/ZH)
@@ -44,6 +54,7 @@ A fully functional **Impostor Game** PWA with advanced mobile-first features:
   - Global language selector on all screens (not just start)
   - localStorage persistence for language preference
   - Real-time UI and word updates on language change
+  - Voting results translate when language changes
   - Easily extensible - just add new language object with same keys
 
 ### 📱 Platform Support
@@ -74,8 +85,8 @@ impostor/
 │   └── favicon.ico                # Browser icon
 ├── src/
 │   ├── data/
-│   │   ├── themes.js              # 8 bilingual word categories (649 lines)
-│   │   └── translations.js        # Complete UI translations (ES/EN)
+│   │   ├── themes.js              # 8 word categories with 4-language mapping (649 lines)
+│   │   └── translations.js        # Complete UI translations (ES/EN/FR/ZH)
 │   ├── utils/
 │   │   ├── languageManager.js     # Language switching & UI updates
 │   │   ├── playerUtils.js         # Player creation & avatar assignment
@@ -85,12 +96,12 @@ impostor/
 │   │   ├── startScreen.js         # Welcome + language selector
 │   │   ├── themeScreen.js         # Multi-select word categories
 │   │   ├── setupScreen.js         # Player config + swipe pickers (223 lines)
-│   │   ├── revealScreen.js        # Bidirectional swipe reveal (161 lines)
-│   │   └── gameScreen.js          # Timer display + impostor reveals
-│   ├── game.js                    # GameState class (state management)
+│   │   ├── revealScreen.js        # Bidirectional swipe reveal (208 lines)
+│   │   └── gameScreen.js          # Timer + voting system (250+ lines)
+│   ├── game.js                    # GameState class with voting logic (237 lines)
 │   ├── main.js                    # Entry point & screen routing
-│   └── styles.css                 # Global styles (830+ lines)
-├── index.html                     # Single-page HTML (156 lines, 5 screens)
+│   └── styles.css                 # Global styles (1000+ lines with voting UI)
+├── index.html                     # Single-page HTML with voting section (205 lines)
 ├── vite.config.js                 # Vite + PWA configuration
 ├── capacitor.config.ts            # Native app configuration
 ├── package.json                   # Dependencies & scripts
@@ -117,13 +128,19 @@ impostor/
 10. ✅ Unique player name validation (case-insensitive)
 11. ✅ Flexible impostor count (no max, just < player count)
 12. ✅ Timer logic with infinite and timed modes
-13. ✅ Sequential impostor revelation system
-14. ✅ PWA manifest with offline capability
-15. ✅ Capacitor setup for native mobile apps
-16. ✅ Responsive mobile-first design with vertical-only scroll
-17. ✅ Avatar system with 11 variations
-18. ✅ Enhanced UI with hover/focus states
-19. ✅ localStorage language persistence
+13. ✅ **Voting System**: Vote for suspected impostors with results tracking
+14. ✅ **Anti-cheat Voting**: Players/impostors already revealed cannot be voted again
+15. ✅ **Multiple Voting Rounds**: Keep voting until all impostors found
+16. ✅ **Dynamic Game Messages**: UI updates based on game state (Started/Continues/Over)
+17. ✅ **Mocking Reveals**: Button-revealed impostors show "😈 You didn't find me!" message
+18. ✅ **Vote Result Display**: ✓ Correct (green) / ✗ Wrong (red) with badge styling
+19. ✅ **Language-aware Results**: Voting results translate when changing language
+20. ✅ PWA manifest with offline capability
+21. ✅ Capacitor setup for native mobile apps
+22. ✅ Responsive mobile-first design with vertical-only scroll
+23. ✅ Avatar system with 11 variations
+24. ✅ Enhanced UI with hover/focus states
+25. ✅ localStorage language persistence
 
 ## 🎯 How to Test
 
@@ -136,7 +153,12 @@ impostor/
 6. **Test swipe pickers**: Use mouse to drag vertically on number selectors
 7. **Configure game**: Set impostor count and timer mode
 8. **Role reveal**: Click and drag up/down on reveal card
-9. **Play game**: Test timer countdown and impostor reveals
+9. **Play game**: 
+   - **Test voting**: Click "Vote for Impostors", select players (up to impostor count), confirm
+   - Verify results show ✓ Correct (green) / ✗ Wrong (red)
+   - Vote again, verify previously voted players don't appear
+   - **Test manual reveal**: Click "Reveal Impostor" button, see mocking message
+   - Change language, verify vote results translate
 10. **Navigation**: Test back buttons and play again
 
 ### On Mobile Device:
@@ -146,9 +168,14 @@ impostor/
    - Vertical swipe on number pickers
    - Bidirectional swipe on role reveal
    - Theme multi-select buttons
-4. **Test responsiveness**: Portrait and landscape orientations
-5. **Install as PWA**: Chrome menu → "Install App"
-6. **Test offline**: Turn off WiFi, verify app still works
+   - Voting: tap players to select/deselect
+4. **Test voting system**: 
+   - Vote for impostors, confirm, see results
+   - Verify voted players disappear from next voting round
+   - Test reveal button, verify mocking message appears
+5. **Test responsiveness**: Portrait and landscape orientations
+6. **Install as PWA**: Chrome menu → "Install App"
+7. **Test offline**: Turn off WiFi, verify app still works
 
 ### Production Build:
 ```bash
@@ -415,7 +442,7 @@ npm run build
    - ✅ ~~Multiple word categories~~ (DONE: 8 themes)
    - ✅ ~~Internationalization~~ (DONE: 4 languages - ES/EN/FR/ZH)
    - ✅ ~~GitHub Pages deployment~~ (DONE: Auto CI/CD)
-   - Voting system for impostor elimination
+   - ✅ ~~Voting system for impostor elimination~~ (DONE: Complete with anti-cheat)
    - Player statistics/history with localStorage
    - Sound effects and haptic feedback
    - Animation polish (entrance/exit transitions)
