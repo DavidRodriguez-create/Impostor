@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!gameState.hasMoreImpostors()) {
       // Game over - all impostors revealed
       revealImpostorBtn.disabled = true;
-      revealImpostorBtn.textContent = t('allRevealed');
+      revealImpostorBtn.style.display = 'none';
       voteBtn.style.display = 'none';
       document.querySelector('#game-screen h2').textContent = t('gameOver');
       gameState.stopTimer();
