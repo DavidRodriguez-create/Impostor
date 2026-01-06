@@ -7,6 +7,7 @@ let touchStartY = 0;
 let touchCurrentY = 0;
 let isDragging = false;
 let isRevealed = false;
+let hasBeenRevealed = false; // Track if player has seen their role at least once
 let currentTranslateY = 0; // Track current position
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -46,17 +47,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Reset reveal state
     isRevealed = false;
+    hasBeenRevealed = false; // Reset for new player
     currentTranslateY = 0;
     revealCover.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
     revealCover.style.transform = 'translateY(0)';
     revealCover.style.opacity = '1';
 
-    // Update button text
+    // Update button text and state
+    updateNextButtonState();
+  }
+
+  function updateNextButtonState() {
     if (gameState.isLastPlayer()) {
       nextPlayerBtn.textContent = t('startGameNow');
     } else {
       nextPlayerBtn.textContent = t('nextPlayer');
     }
+    
+    // Disable button if player hasn't revealed their role yet
+    nextPlayerBtn.disabled = !hasBeenRevealed;
+    nextPlayerBtn.style.opacity = hasBeenRevealed ? '1' : '0.5';
+    nextPlayerBtn.style.cursor = hasBeenRevealed ? 'pointer' : 'not-allowed';
   }
 
   // Touch/Mouse handlers for swipe-up reveal
@@ -91,6 +102,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Update revealed state based on position
     if (newTranslateY >= 150) {
       isRevealed = true;
+      if (!hasBeenRevealed) {
+        hasBeenRevealed = true; // Mark as revealed once they've swiped up
+        updateNextButtonState();
+      }
     } else if (newTranslateY <= 50) {
       isRevealed = false;
     }
@@ -114,6 +129,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (finalTranslateY >= 150) {
       // Snap to revealed (fully up)
       isRevealed = true;
+      if (!hasBeenRevealed) {
+        hasBeenRevealed = true;
+        updateNextButtonState();
+      }
       currentTranslateY = 300;
       revealCover.style.transform = 'translateY(-300px)';
       revealCover.style.opacity = '0';
@@ -137,6 +156,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Next player button
   nextPlayerBtn.addEventListener('click', () => {
+    // Only proceed if player has revealed their role
+    if (!hasBeenRevealed) return;
+    
     if (gameState.nextPlayer()) {
       showCurrentPlayer();
     } else {
