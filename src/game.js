@@ -28,11 +28,22 @@ class GameState {
     
     // Game flow
     this.currentPlayerIndex = 0;
+    this.revealOrder = []; // Shuffled indices for reveal order
     this.impostors = [];
     this.revealedImpostors = [];
     this.votedPlayers = [];
     this.votingResults = [];
     this.allVotedPlayerIds = []; // Track all players ever voted for
+  }
+
+  // Shuffle array using Fisher-Yates algorithm
+  shuffleArray(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
   }
 
   // Player Management Methods
@@ -66,6 +77,10 @@ class GameState {
     this.impostors = selectImpostors(this.players, this.impostorCount);
     markImpostors(this.players, this.impostors);
     
+    // Create shuffled reveal order
+    const indices = this.players.map((_, index) => index);
+    this.revealOrder = this.shuffleArray(indices);
+    
     // Reset game flow
     this.revealedImpostors = [];
     this.currentPlayerIndex = 0;
@@ -82,7 +97,8 @@ class GameState {
   // Player Navigation Methods
   
   getCurrentPlayer() {
-    return this.players[this.currentPlayerIndex];
+    const revealIndex = this.revealOrder[this.currentPlayerIndex];
+    return this.players[revealIndex];
   }
 
   nextPlayer() {
