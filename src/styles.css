@@ -187,6 +187,51 @@ h2 {
   align-items: center;
   justify-content: center;
   min-height: calc(100vh - 40px);
+  position: relative;
+}
+
+.version-info {
+  position: absolute;
+  bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.version-info:hover {
+  opacity: 1;
+}
+
+.version-label {
+  font-weight: 600;
+}
+
+#app-version {
+  font-family: monospace;
+  font-weight: 600;
+}
+
+.github-link {
+  display: flex;
+  align-items: center;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  margin-left: 4px;
+}
+
+.github-link:hover {
+  color: var(--primary-color);
+  transform: scale(1.1);
+}
+
+.github-link svg {
+  width: 20px;
+  height: 20px;
 }
 
 /* Language Selector */

@@ -5,6 +5,7 @@ import './screens/themeScreen.js';
 import './screens/setupScreen.js';
 import './screens/revealScreen.js';
 import './screens/gameScreen.js';
+import packageJson from '../package.json';
 
 // Screen navigation
 export function showScreen(screenId) {
@@ -18,5 +19,12 @@ export function showScreen(screenId) {
 document.addEventListener('DOMContentLoaded', () => {
   console.log('Impostor Game Loaded');
   initLanguageSelector();
+  
+  // Set version dynamically
+  const versionElement = document.getElementById('app-version');
+  if (versionElement) {
+    versionElement.textContent = packageJson.version;
+  }
+  
   showScreen('start-screen');
 });
