@@ -81,6 +81,36 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function hideWinnersFromList() {
+    // Get all winner player names from winners section
+    const winnerCards = winnersContent.querySelectorAll('.winner-card');
+    const winnerNames = Array.from(winnerCards).map(card => 
+      card.querySelector('.winner-name').textContent
+    );
+    
+    // If players won (no winner cards), hide all impostors from the list
+    if (winnerNames.length === 0) {
+      // Players won - hide all impostors
+      const allCards = revealedImpostorsDiv.querySelectorAll('.revealed-impostor-card');
+      allCards.forEach(card => {
+        const badges = card.querySelector('.impostor-badges');
+        if (badges) {
+          // This is an impostor card - hide it
+          card.style.display = 'none';
+        }
+      });
+    } else {
+      // Impostors won - hide only the winning impostors
+      const allCards = revealedImpostorsDiv.querySelectorAll('.revealed-impostor-card');
+      allCards.forEach(card => {
+        const playerName = card.querySelector('h3').textContent;
+        if (winnerNames.includes(playerName)) {
+          card.style.display = 'none';
+        }
+      });
+    }
+  }
+
   function initializeGameScreen() {
     // Reset header text
     document.querySelector('#game-screen h2').textContent = t('gameStarted');
@@ -151,6 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
       document.querySelector('#game-screen h2').textContent = t('gameOver');
       gameState.stopTimer();
       displayWinners();
+      hideWinnersFromList();
       gameOverActions.style.display = 'flex';
     } else {
       // Game continues - more impostors to reveal
@@ -237,6 +268,7 @@ document.addEventListener('DOMContentLoaded', () => {
       document.querySelector('#game-screen h2').textContent = t('gameOver');
       gameState.stopTimer();
       displayWinners();
+      hideWinnersFromList();
       gameOverActions.style.display = 'flex';
     } else {
       gameHeader.style.display = 'block';
