@@ -55,7 +55,6 @@ export default defineConfig({
       }
     })
   ],
-  base: '/impostor/',
   build: {
     outDir: 'dist',
     sourcemap: false,
