@@ -970,6 +970,85 @@ h2 {
   margin-top: 20px;
 }
 
+/* Winners Section */
+.winners-section {
+  margin: 30px 0;
+  padding: 30px;
+  background: linear-gradient(135deg, rgba(108, 92, 231, 0.1), rgba(0, 184, 148, 0.1));
+  border-radius: var(--border-radius-lg);
+  border: 2px solid var(--primary-color);
+  animation: slideDown 0.5s ease;
+}
+
+.winners-announcement h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  text-align: center;
+  color: var(--primary-color);
+  text-shadow: 0 0 20px rgba(108, 92, 231, 0.5);
+}
+
+.winners-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.winner-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
+  background: var(--bg-medium);
+  border-radius: var(--border-radius);
+  border: 2px solid var(--success-color);
+  box-shadow: 0 0 20px rgba(0, 184, 148, 0.3);
+  animation: bounceIn 0.6s ease;
+}
+
+.winner-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid var(--success-color);
+  box-shadow: 0 0 15px rgba(0, 184, 148, 0.5);
+}
+
+.winner-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-light);
+  text-align: center;
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) translateY(-20px);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Scrollbar Styles */
 ::-webkit-scrollbar {
   width: 8px;

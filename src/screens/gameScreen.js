@@ -16,9 +16,70 @@ document.addEventListener('DOMContentLoaded', () => {
   const votesRemainingSpan = document.getElementById('votes-remaining');
   const confirmVotesBtn = document.getElementById('confirm-votes-btn');
   const revealedImpostorsDiv = document.getElementById('revealed-impostors');
+  const winnersSection = document.getElementById('winners-section');
+  const winnersContent = document.getElementById('winners-content');
   const gameOverActions = document.getElementById('game-over-actions');
   const playAgainBtn = document.getElementById('play-again-btn');
   const backToSetupBtn = document.getElementById('back-to-setup-btn');
+
+  function displayWinners() {
+    winnersContent.innerHTML = '';
+    winnersSection.style.display = 'block';
+    
+    // Check which impostors were revealed by button (not discovered through voting)
+    const buttonRevealedCards = document.querySelectorAll('.revealed-impostor-card.revealed-by-button');
+    const buttonRevealedImpostors = [];
+    
+    buttonRevealedCards.forEach(card => {
+      const playerName = card.querySelector('h3').textContent;
+      const impostor = gameState.players.find(p => p.name === playerName && p.isImpostor);
+      if (impostor) {
+        buttonRevealedImpostors.push(impostor);
+      }
+    });
+    
+    // Players win only if ALL impostors were discovered through voting (no button reveals)
+    const playersWin = buttonRevealedImpostors.length === 0 && 
+                       gameState.revealedImpostors.length === gameState.impostorCount;
+    
+    if (playersWin) {
+      // All impostors found through voting - regular players win
+      winnersContent.innerHTML = `
+        <div class="winners-announcement">
+          <h2>${t('winnersPlayers')}</h2>
+        </div>
+      `;
+    } else {
+      // Impostors win - show those who weren't discovered (button revealed or escaped)
+      const winningImpostors = gameState.players.filter(p => {
+        if (!p.isImpostor) return false;
+        
+        // Check if this impostor was revealed by button
+        const revealedByButton = buttonRevealedImpostors.find(imp => imp.id === p.id);
+        if (revealedByButton) return true;
+        
+        // Check if this impostor escaped (never revealed)
+        const wasRevealed = gameState.revealedImpostors.find(r => r.id === p.id);
+        if (!wasRevealed) return true;
+        
+        return false;
+      });
+      
+      winnersContent.innerHTML = `
+        <div class="winners-announcement">
+          <h2>${t('winnersImpostors')}</h2>
+          <div class="winners-list">
+            ${winningImpostors.map(impostor => `
+              <div class="winner-card">
+                <img src="${impostor.avatar}" alt="${impostor.name}" class="winner-avatar">
+                <div class="winner-name">${impostor.name}</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+  }
 
   function initializeGameScreen() {
     // Reset header text
@@ -32,6 +93,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Set initial impostor count
     impostorsRemainingSpan.textContent = gameState.impostorCount;
     revealedImpostorsDiv.innerHTML = '';
+    winnersSection.style.display = 'none';
+    winnersContent.innerHTML = '';
     gameOverActions.style.display = 'none';
     votingSection.style.display = 'none';
     voteBtn.style.display = 'inline-block';
@@ -87,6 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
       gameInfo.style.display = 'none';
       document.querySelector('#game-screen h2').textContent = t('gameOver');
       gameState.stopTimer();
+      displayWinners();
       gameOverActions.style.display = 'flex';
     } else {
       // Game continues - more impostors to reveal
@@ -172,6 +236,7 @@ document.addEventListener('DOMContentLoaded', () => {
       gameHeader.style.display = 'block';
       document.querySelector('#game-screen h2').textContent = t('gameOver');
       gameState.stopTimer();
+      displayWinners();
       gameOverActions.style.display = 'flex';
     } else {
       gameHeader.style.display = 'block';
@@ -272,6 +337,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // Update voting button text if visible
     if (voteBtn.style.display !== 'none') {
       voteBtn.textContent = t('voteForImpostors');
+    }
+
+    // Update winners section if visible
+    if (winnersSection.style.display !== 'none') {
+      const winnersTitle = winnersSection.querySelector('.winners-announcement h2');
+      if (winnersTitle) {
+        // Check if it's players win or impostors win based on current text
+        const isPlayersWin = winnersTitle.textContent.includes('Jugadores') || 
+                             winnersTitle.textContent.includes('Players') ||
+                             winnersTitle.textContent.includes('Joueurs') ||
+                             winnersTitle.textContent.includes('玩家');
+        winnersTitle.textContent = isPlayersWin ? t('winnersPlayers') : t('winnersImpostors');
+      }
     }
   });
 });

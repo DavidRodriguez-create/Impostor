@@ -53,6 +53,8 @@ export const TRANSLATIONS = {
     wrongGuess: "¡Incorrecto! No era impostor",
     playAgain: "Jugar de Nuevo",
     backToStart: "Volver al Inicio",
+    winnersImpostors: "🎉 ¡Ganaron los Impostores!",
+    winnersPlayers: "🎉 ¡Ganaron los Jugadores!",
     
     // Alerts
     maxPlayersReached: "Máximo de {max} jugadores alcanzado",
@@ -111,9 +113,11 @@ export const TRANSLATIONS = {
     confirmVotes: "Confirm Votes",
     votingResults: "Voting Results",
     correctGuess: "Correct! Was an impostor",
-    wrongGuess: "Wrong! Was not an impostor",
+    wrongGuess: "Wrong! Not an impostor",
     playAgain: "Play Again",
     backToStart: "Back to Start",
+    winnersImpostors: "🎉 Impostors Win!",
+    winnersPlayers: "🎉 Players Win!",
     
     // Alerts
     maxPlayersReached: "Maximum of {max} players reached",
@@ -175,6 +179,8 @@ export const TRANSLATIONS = {
     wrongGuess: "Faux! N'était pas un imposteur",
     playAgain: "Rejouer",
     backToStart: "Retour au Début",
+    winnersImpostors: "🎉 Les Imposteurs Gagnent!",
+    winnersPlayers: "🎉 Les Joueurs Gagnent!",
     
     // Alerts
     maxPlayersReached: "Maximum de {max} joueurs atteint",
@@ -236,6 +242,8 @@ export const TRANSLATIONS = {
     wrongGuess: "错误！不是冒名顶替者",
     playAgain: "再玩一次",
     backToStart: "返回开始",
+    winnersImpostors: "🎉 冒名顶替者获胜！",
+    winnersPlayers: "🎉 玩家获胜！",
     
     // Alerts
     maxPlayersReached: "已达到最多 {max} 名玩家",
