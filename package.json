@@ -5,20 +5,24 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "node scripts/auto-optimize-images.js --auto",
     "build": "vite build",
     "preview": "vite preview",
+    "check:images": "node scripts/auto-optimize-images.js",
     "cap:sync": "cap sync",
     "cap:android": "cap open android",
     "cap:ios": "cap open ios"
   },
   "devDependencies": {
+    "rollup-plugin-visualizer": "^6.0.5",
+    "sharp": "^0.34.5",
     "vite": "^4.5.0",
     "vite-plugin-pwa": "^0.16.0"
   },
   "dependencies": {
     "@capacitor/android": "^5.5.0",
+    "@capacitor/cli": "^5.5.0",
     "@capacitor/core": "^5.5.0",
-    "@capacitor/ios": "^5.5.0",
-    "@capacitor/cli": "^5.5.0"
+    "@capacitor/ios": "^5.5.0"
   }
 }
