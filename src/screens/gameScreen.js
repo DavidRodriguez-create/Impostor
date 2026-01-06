@@ -70,6 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Game over - all impostors revealed
       revealImpostorBtn.disabled = true;
       revealImpostorBtn.textContent = t('allRevealed');
+      voteBtn.style.display = 'none';
       document.querySelector('#game-screen h2').textContent = t('gameOver');
       gameState.stopTimer();
       gameOverActions.style.display = 'flex';
@@ -145,6 +146,8 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Check if all impostors found
     if (!gameState.hasMoreImpostors()) {
+      voteBtn.style.display = 'none';
+      revealImpostorBtn.style.display = 'none';
       document.querySelector('#game-screen h2').textContent = t('gameOver');
       gameState.stopTimer();
       gameOverActions.style.display = 'flex';
@@ -206,12 +209,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // Update texts when language changes
   document.addEventListener('language-changed', () => {
     // Update button text based on current game state
-    if (revealImpostorBtn.disabled && gameState.revealedImpostors.length === gameState.impostorCount) {
-      // All revealed
+    if (gameState.revealedImpostors.length === gameState.impostorCount) {
+      // All revealed - game over
       revealImpostorBtn.textContent = t('allRevealed');
       document.querySelector('#game-screen h2').textContent = t('gameOver');
     } else if (gameState.revealedImpostors.length > 0) {
-      // Game continues
+      // Game continues - more impostors to find
       revealImpostorBtn.textContent = t('revealNextImpostor');
       document.querySelector('#game-screen h2').textContent = t('gameContinues');
     } else {
