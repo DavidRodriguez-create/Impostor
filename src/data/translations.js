@@ -10,6 +10,7 @@ export const TRANSLATIONS = {
     selectThemesSubtitle: "Elige uno o más temas para las palabras secretas",
     themesSelected: "Temas seleccionados:",
     continueToSetup: "Continuar al Setup",
+    words: "palabras",
     
     // Setup Screen
     configuration: "Configuración",
@@ -73,6 +74,7 @@ export const TRANSLATIONS = {
     selectThemesSubtitle: "Choose one or more themes for the secret words",
     themesSelected: "Themes selected:",
     continueToSetup: "Continue to Setup",
+    words: "words",
     
     // Setup Screen
     configuration: "Configuration",
@@ -136,6 +138,7 @@ export const TRANSLATIONS = {
     selectThemesSubtitle: "Choisissez un ou plusieurs thèmes pour les mots secrets",
     themesSelected: "Thèmes sélectionnés:",
     continueToSetup: "Continuer à la Configuration",
+    words: "mots",
     
     // Setup Screen
     configuration: "Configuration",
@@ -199,6 +202,7 @@ export const TRANSLATIONS = {
     selectThemesSubtitle: "为秘密词选择一个或多个主题",
     themesSelected: "已选主题：",
     continueToSetup: "继续设置",
+    words: "个词",
     
     // Setup Screen
     configuration: "配置",

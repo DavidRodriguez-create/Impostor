@@ -1,6 +1,7 @@
 import { gameState } from '../game.js';
 import { getAllThemes } from '../data/themes.js';
 import { showScreen } from '../main.js';
+import { t } from '../data/translations.js';
 
 // Theme Selection Screen Logic
 document.addEventListener('DOMContentLoaded', () => {
@@ -24,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
       themeCard.innerHTML = `
         <div class="theme-check">${isSelected ? '✓' : ''}</div>
         <div class="theme-name">${theme.name}</div>
-        <div class="theme-count">${theme.words.length} palabras</div>
+        <div class="theme-count">${Object.keys(theme.words).length} ${t('words')}</div>
       `;
       
       themeCard.addEventListener('click', () => toggleTheme(themeKey));
