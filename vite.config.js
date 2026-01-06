@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
+  base: '/Impostor/',
   plugins: [
     VitePWA({
       registerType: 'autoUpdate',
@@ -54,6 +55,7 @@ export default defineConfig({
       }
     })
   ],
+  base: '/impostor/',
   build: {
     outDir: 'dist',
     sourcemap: false,
