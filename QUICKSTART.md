@@ -1,5 +1,11 @@
 # 🚀 Quick Start Guide
 
+## 🌐 Demo en Vivo
+
+**Ya está desplegado**: [https://davidrodriguez-create.github.io/Impostor/](https://davidrodriguez-create.github.io/Impostor/)
+
+¿Quieres hacer cambios? Sigue leyendo.
+
 ## Development Server
 
 Start the dev server:
@@ -83,6 +89,34 @@ Then build IPA from Xcode
 - [ ] PWA installation capability
 - [ ] Offline functionality (after first load)
 - [ ] Player input box styling and validation
+
+## 📦 Deployment
+
+### GitHub Pages (Automático)
+
+Cada vez que hagas `git push` a `main`, se despliega automáticamente:
+
+```bash
+git add .
+git commit -m "tu mensaje"
+git push origin main
+```
+
+Espera 1-2 minutos y verifica: https://davidrodriguez-create.github.io/Impostor/
+
+### Otros Servicios
+
+#### Vercel
+```bash
+npm run build
+# Upload dist/ folder or connect GitHub repo
+```
+
+#### Netlify
+```bash
+npm run build
+# Drag dist/ folder to Netlify Drop
+```
 
 ## 🎨 Customization Ideas
 

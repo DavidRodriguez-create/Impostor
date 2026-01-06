@@ -1,5 +1,13 @@
 # 🎭 Impostor Game - Implementation Complete
 
+## 🌐 Demo en Vivo
+
+**▶️ [https://davidrodriguez-create.github.io/Impostor/](https://davidrodriguez-create.github.io/Impostor/)**
+
+✅ Desplegado en GitHub Pages con CI/CD automático
+
+---
+
 ## ✅ What's Been Built
 
 A fully functional **Impostor Game** PWA with advanced mobile-first features:
@@ -150,7 +158,26 @@ npm run preview     # Test production build at http://localhost:4173/
 
 ## 📦 Deployment Options
 
-### 1. Web Hosting
+### 1. GitHub Pages (✅ ACTUAL)
+
+**Ya está desplegado en**: https://davidrodriguez-create.github.io/Impostor/
+
+**CI/CD Automático:**
+- Workflow: `.github/workflows/deploy.yml`
+- Trigger: Push a rama `main`
+- Build: `npm install && npm run build`
+- Deploy: Rama `gh-pages`
+- Tiempo: ~1-2 minutos
+
+**Para actualizar:**
+```bash
+git add .
+git commit -m "Update app"
+git push origin main
+# GitHub Actions hace el resto automáticamente
+```
+
+### 2. Otros Servicios de Web Hosting
 - Upload `dist/` folder to:
   - Vercel (recommended)
   - Netlify
@@ -344,11 +371,50 @@ constructor() {
 - Touch-optimized button sizes (48px minimum)
 - Hover states for desktop compatibility
 
+## 🚀 Deployment
+
+### GitHub Pages (⚡ ACTUAL)
+
+**Ya está desplegado en**: https://davidrodriguez-create.github.io/Impostor/
+
+**CI/CD Automático:**
+- Workflow: `.github/workflows/deploy.yml`
+- Trigger: Push a rama `main`
+- Build: `npm install && npm run build`
+- Deploy: Rama `gh-pages`
+- Tiempo: ~1-2 minutos
+
+**Para actualizar:**
+```bash
+git add .
+git commit -m "Update app"
+git push origin main
+# GitHub Actions hace el resto automáticamente
+```
+
+**Configuración actual:**
+- `vite.config.js`: `base: './'` (rutas relativas)
+- `index.html`: Todos los assets usan rutas relativas (`./src/main.js`)
+- Settings → Pages → Source: `gh-pages` branch
+
+### Otros Servicios
+
+**Vercel/Netlify:**
+```bash
+npm run build
+# Subir carpeta dist/ o conectar repo de GitHub
+```
+
+**Hosting estático (Apache/Nginx):**
+- Subir contenido de `dist/` al servidor
+- Configurar HTTPS para que la PWA funcione
+
 ## 💡 Future Enhancement Ideas
 
 1. **Game Features**
    - ✅ ~~Multiple word categories~~ (DONE: 8 themes)
-   - ✅ ~~Internationalization~~ (DONE: ES/EN system)
+   - ✅ ~~Internationalization~~ (DONE: 4 languages - ES/EN/FR/ZH)
+   - ✅ ~~GitHub Pages deployment~~ (DONE: Auto CI/CD)
    - Voting system for impostor elimination
    - Player statistics/history with localStorage
    - Sound effects and haptic feedback
