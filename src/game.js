@@ -1,5 +1,5 @@
 import { selectRandomWord, getTranslatedWord } from './data/themes.js';
-import { createPlayer, canAddPlayer, removePlayerById } from './utils/playerUtils.js';
+import { createPlayer, canAddPlayer, removePlayerById, resetAvatarPool } from './utils/playerUtils.js';
 import { selectImpostors, resetPlayerRoles, markImpostors } from './utils/roleUtils.js';
 import { formatTime, calculateEndTime, getRemainingTime } from './utils/timerUtils.js';
 
@@ -52,6 +52,9 @@ class GameState {
   // Role Assignment Methods
   
   assignRoles() {
+    // Reset avatar pool for new game
+    resetAvatarPool();
+    
     // Select random word for this round
     const wordData = selectRandomWord(this.selectedThemes);
     this.gameWord = wordData.word;

@@ -4,8 +4,44 @@
 
 // Dynamically count avatars using Vite's glob import
 // Using absolute path from project root (/public is served as /)
-const avatarFiles = import.meta.glob('/avatars/avatar-*.png', { eager: true });
+const avatarFiles = import.meta.glob('/avatars/avatar-*.png', { eager: false });
 const AVATAR_COUNT = Object.keys(avatarFiles).length || 11; // Fallback to 11 if glob fails
+
+// Track used avatars to avoid repetition
+let usedAvatars = [];
+
+/**
+ * Get a non-repeating avatar ID
+ * Tries to avoid repetition until all avatars are used
+ */
+function getAvailableAvatarId() {
+  // If all avatars have been used, reset the pool
+  if (usedAvatars.length >= AVATAR_COUNT) {
+    usedAvatars = [];
+  }
+  
+  // Get available avatar IDs
+  const availableIds = [];
+  for (let i = 1; i <= AVATAR_COUNT; i++) {
+    if (!usedAvatars.includes(i)) {
+      availableIds.push(i);
+    }
+  }
+  
+  // Pick random from available
+  const avatarId = availableIds[Math.floor(Math.random() * availableIds.length)];
+  usedAvatars.push(avatarId);
+  
+  return avatarId;
+}
+
+/**
+ * Reset avatar selection pool
+ * Call this when starting a new game
+ */
+export function resetAvatarPool() {
+  usedAvatars = [];
+}
 
 /**
  * Create a new player object
@@ -13,7 +49,7 @@ const AVATAR_COUNT = Object.keys(avatarFiles).length || 11; // Fallback to 11 if
  * @returns {object} Player object
  */
 export function createPlayer(name) {
-  const avatarId = Math.floor(Math.random() * AVATAR_COUNT) + 1;
+  const avatarId = getAvailableAvatarId();
   return {
     id: Date.now() + Math.random(),
     name,
