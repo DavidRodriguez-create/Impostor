@@ -83,6 +83,8 @@ document.addEventListener('DOMContentLoaded', () => {
       revealImpostorBtn.disabled = true;
       revealImpostorBtn.style.display = 'none';
       voteBtn.style.display = 'none';
+      timerDisplay.style.display = 'none';
+      gameInfo.style.display = 'none';
       document.querySelector('#game-screen h2').textContent = t('gameOver');
       gameState.stopTimer();
       gameOverActions.style.display = 'flex';
@@ -165,6 +167,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!gameState.hasMoreImpostors()) {
       voteBtn.style.display = 'none';
       revealImpostorBtn.style.display = 'none';
+      timerDisplay.style.display = 'none';
+      gameInfo.style.display = 'none';
       gameHeader.style.display = 'block';
       document.querySelector('#game-screen h2').textContent = t('gameOver');
       gameState.stopTimer();
